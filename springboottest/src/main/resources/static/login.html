@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>用户登录</title>
+    <!--<link rel="shortcut icon" href="#"/>-->
+    <script type="text/javascript" src="js/jquery-1.4.2.js"></script>
+</head>
+
+<body style="background: antiquewhite">
+<h1>登录</h1>
+    <div>
+        <label>用户</label>
+        <input type="text" id="username">
+    </div>
+    <div>
+        <label>密码</label>
+        <input type="password" id="password">
+    </div>
+    <div>
+        <a href="reg.html"><input type="submit" value="注册"></a>
+        <input type="submit" value="登录" id="submit">
+    </div>
+
+    <script type="text/javascript">
+
+        $("#submit").click(function () {
+            // alert("11111111111111")
+            $.ajax({
+                type:"post",
+                url:"login",
+                data:{
+                    "username":$("#username").val(),
+                    "password":$("#password").val()
+                },
+                // dataType:"json",
+                success:function (result) {
+                    alert(result);
+                    if("登录成功" === result){
+                        // $("#success").html(result);
+                        window.location.href = 'index.html'
+                    }
+                }
+            })
+        })
+
+    </script>
+
+
+</body>
+</html>

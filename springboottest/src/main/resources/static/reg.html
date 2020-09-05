@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户注册</title>
+    <script type="text/javascript" src="js/jquery-1.4.2.js"></script>
+</head>
+<script type="text/javascript" src="js/jquery-1.4.2.js">
+    $("#submit").click(function () {
+        alert($("#reg_form").serialize())
+        $.ajax({
+            type:"post",
+            url:"reg",
+            // dataType:"json",
+            // data:{
+            //     "username":$("#username").val(),
+            //     "password":$("#password").val(),
+            //     "age":$("#age").val(),
+            //     "phone":$("#phone").val(),
+            //     "email":$("#email").val()
+            // },
+            data: $("#reg_form").serialize(),
+            // dataType:"json",
+            success:function (result) {
+                alert(result);
+                if("注册成功" === result){
+                    // $("#success").html(result);
+                    window.location.href = 'login.html'
+                }
+            }
+        })
+        return false;
+    })
+</script>
+<body>
+<h1>注册</h1>
+<form method="post" action="reg" id="reg_form">
+
+    <div>
+        <label>用户</label>
+        <input type="text" name="username">
+    </div>
+    <div>
+        <label>密码</label>
+        <input type="password" name="password">
+    </div>
+    <div>
+        <label>年龄</label>
+        <input type="number" name="age">
+    </div>
+    <div>
+        <label>电话</label>
+        <input type="tel" name="phone">
+    </div>
+    <div>
+        <label>电邮</label>
+        <input type="email" name="email">
+    </div>
+    <div>
+        <input type="submit" value="注册" id="submit">
+    </div>
+
+</form>
+
+<!--<div id="success" style="color: blue"></div>-->
+
+
+</body>
+</html>

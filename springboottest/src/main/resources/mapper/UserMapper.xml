@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 用户Mapper -->
+<mapper namespace="cn.tedu.springboot.test.mapper.UserMapper">
+
+    <insert id="insertReg" parameterType="cn.tedu.springboot.test.entity.User">
+
+      INSERT INTO t_user
+        (username,password,age,phone,email)
+        VALUES
+        (#{username},#{password},#{age},#{phone},#{email})
+    </insert>
+
+    <select id="getUserInfo" resultType="cn.tedu.springboot.test.entity.User">
+      SELECT id,username,password,age,phone,email
+      FROM t_user
+      <where>
+          <if test="id != '' and id != null">id = #{id} </if>
+          <if test="username != '' and username != null">AND username = #{username}</if>
+      </where>
+    </select>
+
+</mapper>

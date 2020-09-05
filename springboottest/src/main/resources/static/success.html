@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>查询页面</title>
+    <script type="text/javascript" src="js/jquery-1.4.2.js"></script>
+</head>
+<body>
+
+    <h1>查询用户信息</h1>
+
+    id：<input id="uid">
+    用户名：<input id="um">
+    <input type="button" value="查询" id="btn"><br><hr>
+    <!--id：<span id="id" style="color: blue"></span><br>-->
+    <!--用户名：<span id="username" style="color: blue"></span><br>-->
+    <!--密码：<span id="password" style="color: blue"></span><br>-->
+    <!--年龄：<span id="age" style="color: blue"></span><br>-->
+    <!--电话：<span id="phone" style="color: blue"></span><br>-->
+    <!--邮箱：<span id="email" style="color: blue"></span><br>-->
+
+    <div id="userInfo">
+
+    </div>
+
+    <script type="text/javascript">
+
+        $("#btn").click(function () {
+            $.ajax({
+                type:"get",
+                url:"getUserInfo",
+                data:{
+                    "id":$("#uid").val(),
+                    "um":$("#um").val()
+                },
+                dataType:"json",
+                success:function (result) {
+
+                    let data = "";
+
+                    if(null != result[0].message){
+                        alert(result[0].message);
+
+                        // data += "id：<span>"
+                        // data += "</span><br>"
+                        // data += "用户名：<span>"
+                        // data += "</span><br>"
+                        // data += "密码：<span>"
+                        // data += "</span><br>"
+                        // data += "年龄：<span>"
+                        // data += "</span><br>"
+                        // data += "手机号：<span>"
+                        // data += "</span><br>"
+                        // data += "邮箱：<span>"
+                        // data += "</span><br><hr>"
+
+                        data += "<span style='color: blue'>暂无数据</span>"
+                        $("#userInfo").html(data);
+                        return;
+                    }
+
+                    for(let i = 0;i<result.length;i++){
+                        data += "id：<span style='color: blue'>"
+                        data += result[i].id
+                        data += "</span><br>"
+                        data += "用户名：<span style='color: blue'>"
+                        data += result[i].username
+                        data += "</span><br>"
+                        data += "密码：<span style='color: blue'>"
+                        data += result[i].password
+                        data += "</span><br>"
+                        data += "年龄：<span style='color: blue'>"
+                        data += result[i].age
+                        data += "</span><br>"
+                        data += "手机号：<span style='color: blue'>"
+                        data += result[i].phone
+                        data += "</span><br>"
+                        data += "邮箱：<span style='color: blue'>"
+                        data += result[i].email
+                        data += "</span><br><hr>"
+
+                        // data += result[i].id + "," + result[i].username + "," + result[i].password + ","
+                        //     + result[i].age + "," + result[i].phone + "," + result[i].email;
+                    }
+                    $("#userInfo").html(data);
+
+                    // $("#id").html(result.id);
+                    // $("#username").html(result.username);
+                    // $("#password").html(result.password);
+                    // $("#age").html(result.age);
+                    // $("#phone").html(result.phone);
+                    // $("#email").html(result.email);
+
+                }
+            })
+        })
+
+    </script>
+
+</body>
+</html>
